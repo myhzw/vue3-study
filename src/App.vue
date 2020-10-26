@@ -1,16 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <!-- <img alt="Vue logo" src="./assets/logo.png">
+  <h2>欢迎光临</h2>
+  <div>请选择一位服务</div>
+  <div>
+    <button v-for="(item,index) in man" :key="index"  @click="selectGirlFun(index)">
+      {{index}}:{{item}}
+    </button>
+    <div>你选择了【{{ selectMan }}】为你服务</div>
+  </div> -->
+  <router-view />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent,ref } from 'vue';
+
 
 export default defineComponent({
   name: 'App',
-  components: {
-    HelloWorld
+  setup(){
+    const man = ref(['天','地','人'])
+    const selectMan = ref("")
+    const selectGirlFun = (index: number)=>{
+      selectMan.value = man.value[index]
+    }
+
+    return {
+      man,
+      selectMan,
+      selectGirlFun
+    }
   }
 });
 </script>
